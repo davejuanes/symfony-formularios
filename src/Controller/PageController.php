@@ -53,4 +53,19 @@ final class PageController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    #[Route('/contactos-v3', methods: ['GET', 'POST'])]
+    public function contactV3(Request $request): Response
+    {
+        $form = $this->createForm(ContactForm::class);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            dd($form->getData(), $request);
+        }
+
+        return $this->render('page/contact-V3.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
 }
