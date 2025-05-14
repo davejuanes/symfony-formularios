@@ -11,8 +11,18 @@
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
+        <style>
+            .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+        </style>
     </head>
     <body>
-        {% block body %}{% endblock %}
+        {% include '_nav.html.twig' %}
+
+        <div class="container py-5">
+            {% include '_alert.html.twig' %}
+        </div>
+        <div class="example-wrapper">
+            {% block body %}{% endblock %}
+        </div>
     </body>
 </html>

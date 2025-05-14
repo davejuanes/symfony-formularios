@@ -13,7 +13,13 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 final class PageController extends AbstractController
 {
-    #[Route('/contactos-v1', methods: ['GET', 'POST'])]
+    #[Route('/', name: 'index', methods: ['GET'])]
+    public function index(): Response
+    {
+        return $this->render('page/index.html.twig');
+    }
+
+    #[Route('/contactos-v1', name: 'contact-v1', methods: ['GET', 'POST'])]
     public function contactV1(Request $request): Response
     {
         $form = $this->createFormBuilder()
@@ -31,7 +37,9 @@ final class PageController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             // getData() contiene los valores enviados
-            dd($form->getData(), $request);
+            // dd($form->getData(), $request);
+            $this->addFlash('success', 'Prueba form #1 con éxito');
+            return $this->redirectToRoute('contact-v1');
         }
 
         return $this->render('page/contact-V1.html.twig', [
@@ -39,14 +47,16 @@ final class PageController extends AbstractController
         ]);
     }
 
-    #[Route('/contactos-v2', methods: ['GET', 'POST'])]
+    #[Route('/contactos-v2', name: 'contact-v2', methods: ['GET', 'POST'])]
     public function contactV2(Request $request): Response
     {
         $form = $this->createForm(ContactForm::class);
 
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            dd($form->getData(), $request);
+        if ($form->isSubmitted()) {
+            // dd($form->getData(), $request);
+            $this->addFlash('success', 'Prueba form #2 con éxito');
+            return $this->redirectToRoute('contact-v2');
         }
 
         return $this->render('page/contact-V2.html.twig', [
@@ -54,14 +64,16 @@ final class PageController extends AbstractController
         ]);
     }
 
-    #[Route('/contactos-v3', methods: ['GET', 'POST'])]
+    #[Route('/contactos-v3', name: 'contact-v3', methods: ['GET', 'POST'])]
     public function contactV3(Request $request): Response
     {
         $form = $this->createForm(ContactForm::class);
 
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            dd($form->getData(), $request);
+        if ($form->isSubmitted()) {
+            // dd($form->getData(), $request);
+            $this->addFlash('info', 'Prueba form #3 con éxito');
+            return $this->redirectToRoute('contact-v3');
         }
 
         return $this->render('page/contact-V3.html.twig', [
