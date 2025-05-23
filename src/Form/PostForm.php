@@ -25,14 +25,17 @@ class PostForm extends AbstractType
                 'class' => Category::class,
                 'placeholder' => 'Selecciona una categoría',
                 'label' => 'Categorías',
+                // 'required' => false,
             ])
             ->add('title', TextType::class, [
                 'label' => 'Título de la publicación',
                 'help' => 'Piensa en el SEO. Cómo buscarías en Google?',
+                // 'required' => false,
             ])
             ->add('body', TextareaType::class, [
                 'label' => 'Contenido',
                 'attr' => ['rows' => 9, 'class' => 'bg-light'],
+                // 'required' => false,
             ])
             ->add('Enviar', SubmitType::class, [
                 'attr' => ['class' => 'btn-dark'],

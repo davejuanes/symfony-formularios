@@ -19,7 +19,7 @@ final class PostController extends AbstractController
         $form = $this->createForm(PostForm::class);
         
         $form->handleRequest($request);
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($form->getData());
             $entityManager->flush();
 
@@ -38,7 +38,7 @@ final class PostController extends AbstractController
         $form = $this->createForm(PostForm::class, $post);
         
         $form->handleRequest($request);
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             // $entityManager->persist($form->getData());
             $entityManager->flush();
 
