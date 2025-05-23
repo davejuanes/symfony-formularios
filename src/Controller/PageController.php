@@ -3,6 +3,10 @@
 namespace App\Controller;
 
 use App\Form\ContactForm;
+
+use App\Entity\Post;
+use Doctrine\ORM\EntityManagerInterface;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,10 +17,12 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 final class PageController extends AbstractController
 {
-    #[Route('/', name: 'index', methods: ['GET'])]
-    public function index(): Response
+    #[Route('/', name:'index', methods:['GET'])]
+    public function index(EntityManagerInterface $entityManager): Response
     {
-        return $this->render('page/index.html.twig');
+        return $this->render('page/index.html.twig', [
+            'posts' => $entityManager->getRepository(className: Post::class)->findAll()
+        ]);
     }
 
     #[Route('/contactos-v1', name: 'contact-v1', methods: ['GET', 'POST'])]

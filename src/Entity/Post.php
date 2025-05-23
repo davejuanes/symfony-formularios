@@ -25,7 +25,7 @@ class Post
     #[Assert\NotBlank]
     private $body;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(targetEntity: Category::class)]
     #[ORM\JoinColumn(nullable: false)]
     #[Assert\NotNull]
     private $category;
